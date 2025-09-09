@@ -23,8 +23,11 @@ export class TodoService {
     return this.http.post<Todo>(`${environment.apiUrl}`, todo);
   }
 
-  /*
-  async updateTodo(updatedTodo: Todo): Promise<Todo> {
+  public updateTodo(updatedTodo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(`${environment.apiUrl}/${updatedTodo.id}`, updatedTodo);
+  }
+
+  /*async updateTodo(updatedTodo: Todo): Promise<Todo> {
     // TODO: replace with a PUT request
     const foundTodo = this.todoList.find((todo) => todo.id === updatedTodo.id);
     if (!foundTodo) {

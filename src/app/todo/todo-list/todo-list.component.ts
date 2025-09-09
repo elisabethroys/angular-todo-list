@@ -23,21 +23,25 @@ export class TodoListComponent {
     });
   }
 
-  //todos = this.todoService.todos;
-
-  /*updateTodo(todo: Todo) {
-    this.todoService.updateTodo(todo);
-  }*/
+  updateTodo(todo: Todo): void {
+    this.todoService.updateTodo(todo).subscribe({
+      next: (updated) => {
+        console.log('Todo oppdatert:', updated);
+      },
+      error: (err) => {
+        console.error('Feil ved oppdatering:', err);
+      },
+    });
+  }
 
   newTodo(title: string): void {
-  this.todoService.addTodo(title).subscribe({
-    next: () => {
-      this.todos$ = this.todoService.getTodos(); // oppdater listen etter POST
-    },
-    error: (err) => {
-      console.error('Feil ved POST:', err);
-    },
-  });
-}
-
+    this.todoService.addTodo(title).subscribe({
+      next: () => {
+        this.todos$ = this.todoService.getTodos();
+      },
+      error: (err) => {
+        console.error('Feil ved POST:', err);
+      },
+    });
+  }
 }
