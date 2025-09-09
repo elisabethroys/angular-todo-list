@@ -12,44 +12,18 @@ export class TodoService {
 
   private http = inject(HttpClient);
 
-  /*private todoId = 1;
-  private todoList: Todo[] = [
-    {
-      id: this.todoId++,
-      title: 'serve the app',
-      completed: true,
-    },
-    {
-      id: this.todoId++,
-      title: 'familiarise yourself with the codebase',
-      completed: false,
-    },
-    {
-      id: this.todoId++,
-      title: 'start talking to the api',
-      completed: false,
-    },
-  ];*/
-
-  // TODO replace with a get request
-  //todos: Promise<Todo[]> = Promise.resolve(this.todoList);
-
   public getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(`${environment.apiUrl}`);
   }
 
-  /*async addTodo(title: string): Promise<Todo> {
-    // TODO: replace with a POST request
+  public addTodo(title: string): Observable<Todo> {
     const todo = {
-      id: this.todoId++,
-      title: title,
-      completed: false,
+      title: title
     };
-    this.todoList.push(todo);
-
-    return todo;
+    return this.http.post<Todo>(`${environment.apiUrl}`, todo);
   }
 
+  /*
   async updateTodo(updatedTodo: Todo): Promise<Todo> {
     // TODO: replace with a PUT request
     const foundTodo = this.todoList.find((todo) => todo.id === updatedTodo.id);
